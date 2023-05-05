@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  {% if title %}
+  <title> Flask -- {{title}} </Title>
+  {% else %}
+  <title> Flask </Title>
+  {% endif %}
+    <body>
+      {% block content %}
+      {% endblock %}
+      </body>
