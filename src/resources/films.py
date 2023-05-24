@@ -4,15 +4,16 @@ from marshmallow import ValidationError
 from flask_restful import Resource
 from sqlalchemy.orm import joinedload, selectinload
 
-
 from src import db
 from src.database.models import Film
 from src.schemas.films import FilmSchema
+from src.resources.auth import token_required
 
 
 class FilmListApi(Resource):
     film_schema = FilmSchema()
 
+    @token_required
     def get(self, uuid=None):
         if not uuid:
             films = db.session.query(Film).options(selectinload(Film.actors)).all()

@@ -1,10 +1,12 @@
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
-from src.database.models import Actor
+from src.database.models import User
 
 
 class UserSchema(SQLAlchemyAutoSchema):
 
     class Meta:
-        model = Actor
+        model = User
+        exclude = ('id', 'is_admin')
         load_instance = True
+        load_only = ('password',)
