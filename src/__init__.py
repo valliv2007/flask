@@ -6,7 +6,6 @@ from flask_migrate import Migrate
 from flask_swagger_ui import get_swaggerui_blueprint
 
 
-
 app = Flask(__name__)
 app.config.from_object(config.Config)
 db = SQLAlchemy(app)

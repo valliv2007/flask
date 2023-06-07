@@ -7,5 +7,5 @@ from src.database.queries import queries
 class Smoke(Resource):
     def get(self):
         # populate_films()
-        queries()
+        #queries()
         return {'message': 'OK'}
