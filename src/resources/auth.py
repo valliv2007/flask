@@ -35,7 +35,7 @@ class AuthLogin(Resource):
         if not auth:
             return "you are not provide your data", 401, {"WWW-Authenticate": "Basic realm='Authentication_required'"}
         print(auth)
-        user = db.session.query(User).filter_by(username=auth.get('username', '')).first()
+        user = User.find_user_by_username(auth.get('username', ''))
         if not user or not check_password_hash(user.password, auth.get('password', '')):
             return "incorrect password or user", 401, {"WWW-Authenticate": "Basic realm='Authentication_required'"}
         token = jwt.encode({
@@ -56,7 +56,7 @@ def token_required(func):
             uuid = jwt.decode(token, app.config['SECRET_KEY'], "HS256")['user_id']
         except (KeyError, jwt.ExpiredSignatureError):
             return "You are not authorized", 401, {"WWW-Authenticate": "Basic realm='Authentication_required'"}
-        user = db.session.query(User).filter_by(uuid=uuid).first()
+        user = User.find_user_by_uuid(uuid)
         if not user:
             return "You are not authorized", 401, {"WWW-Authenticate": "Basic realm='Authentication_required'"}
         return func(self, *args, **kwargs)
