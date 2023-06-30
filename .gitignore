@@ -134,7 +134,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .DS_Store
-db.sqlite3
 
 .vscode/
 .flake8
