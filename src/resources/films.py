@@ -14,7 +14,6 @@ from src.services.film_service import FilmService
 class FilmListApi(Resource):
     film_schema = FilmSchema()
 
-
     def get(self, uuid=None):
         if not uuid:
             films = FilmService.fetch_all_films(db.session).options(selectinload(Film.actors)).all()
@@ -24,7 +23,7 @@ class FilmListApi(Resource):
             return 'not', 404
         return self.film_schema.dump(film), 200
 
-    @token_required
+    # @token_required
     def post(self):
         try:
             film = self.film_schema.load(request.json, session=db.session)
@@ -34,7 +33,7 @@ class FilmListApi(Resource):
         db.session.commit()
         return self.film_schema.dump(film), 201
 
-    @admin_required
+    # @admin_required
     def put(self, uuid):
         film = FilmService.fetch_film_by_uuid(db.session, uuid)
         if not film:
@@ -76,7 +75,7 @@ class FilmListApi(Resource):
         db.session.commit()
         return {'message': "updated"}, 200
 
-    @admin_required
+    # @admin_required
     def delete(self, uuid):
         film = FilmService.fetch_film_by_uuid(db.session, uuid)
         if not film:
