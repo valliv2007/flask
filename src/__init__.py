@@ -16,9 +16,11 @@ API_URL = '/static/swagger.json'
 SWAGGER_BLUEPRINT = get_swaggerui_blueprint(SWAGGER_URL, API_URL, config={'app_name': 'Flask'})
 app.register_blueprint(SWAGGER_BLUEPRINT, url_prefix=SWAGGER_URL)
 
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
+
 
 @app.route('/greeting', methods=['POST'])
 def greeting():
@@ -27,7 +29,8 @@ def greeting():
         return "Fill the form", 400
     return render_template('greeting.html', name=name)
 
-app.debug =True
+
+app.debug = True
 
 
 def sql_debug(response):

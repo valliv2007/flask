@@ -14,7 +14,7 @@ class AggregationApi(Resource):
         sum_rating = db.session.query(func.sum(Film.rating)).scalar()
         max_length = db.session.query(func.max(Film.length)).scalar()
         min_length = db.session.query(func.min(Film.length)).scalar()
-        films_count_gg = db.session.query(func.count(Film.id)).filter(Film.distributed_by=="Warner Bros. Pictures").scalar()
+        films_count_gg = db.session.query(func.count(Film.id)).filter(Film.distributed_by == "Warner Bros. Pictures").scalar()
         # max_actors = db.session.query(func.count(Actor.films)).filter(Film.id==1, Actor.id==1).scalar()
         return {
             "count": films_count,
@@ -24,6 +24,4 @@ class AggregationApi(Resource):
             "sum_rate": sum_rating,
             "max_length": max_length,
             "min_length": min_length,
-            "films_count_gg": films_count_gg,
-            #"max_actors": max_actors
-            }
+            "films_count_gg": films_count_gg}  # "max_actors": max_actors
