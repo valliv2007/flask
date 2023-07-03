@@ -7,39 +7,34 @@ from .. import app
 
 
 @dataclass
-class FakeFilm:
-    rating = 2.2
-    description = "Fake description"
+class FakeActor:
+    name = 'Fake actor'
+    is_active = True
     distributed_by = "Fake dist"
-    #release_date = "2021-11-04"
-    length = 11.1
-    title = "Fake title"
 
 
-class TestFilms:
+class TestActor:
     uuid = []
 
-    def test_get_films_with_db(self):
+    def test_get_actors_with_db(self):
         client = app.test_client()
-        resp = client.get('/films')
+        resp = client.get('/actors')
         assert resp.status_code == http.HTTPStatus.OK
 
-    @patch('src.services.film_service.FilmService.fetch_all_films', autospec=True)
-    def test_get_films_mock_db(self, mock_db_call):
+    @patch('src.db.session.query', autospec=True)
+    def test_get_actors_mock_db(self, mock_db_call):
         client = app.test_client()
-        resp = client.get('/films')
+        resp = client.get('/actors')
         mock_db_call.assert_called_once()
         assert resp.status_code == http.HTTPStatus.OK
-        assert len(resp.json) == 0
-
+"""
 
     def test_create_film_with_db(self):
         client = app.test_client()
         data = {
-            "rating": 6.6,
-            "description": "test description",
-            "distributed_by": "test dist",
-            "release_date": "2001-11-04",
+            "name": 'Test actor',
+            "is_active" : True,
+            "birthday": "2001-11-04",
             "length": 99.9,
             "title": "Test title"}
         resp = client.post('/films', data=json.dumps(data), content_type='application/json')
@@ -110,4 +105,4 @@ class TestFilms:
         client = app.test_client()
         url = f'/films/{self.uuid[0]}'
         resp = client.delete(url)
-        assert resp.status_code == http.HTTPStatus.NO_CONTENT
+        assert resp.status_code == http.HTTPStatus.NO_CONTENT"""
