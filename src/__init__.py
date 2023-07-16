@@ -49,3 +49,4 @@ app.after_request(sql_debug)
 
 from src import routes
 from src.database import models
+from src.tests import test_actors

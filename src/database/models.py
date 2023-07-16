@@ -51,10 +51,10 @@ class Actor(db.Model):
     is_active = db.Column(db.Boolean, default=False)
     cascaders = db.relationship('Cascasder', uselist=False)
 
-    def __init__(self, name, birthday, is_action) -> None:
+    def __init__(self, name, birthday, is_active) -> None:
         self.name = name
         self.birthday = birthday
-        self.is_action = is_action
+        self.is_active = is_active
         self.uuid = str(uuid.uuid4())
 
     def __repr__(self) -> str:
