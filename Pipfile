@@ -13,6 +13,9 @@ marshmallow-sqlalchemy = "*"
 flask-debugtoolbar = "*"
 sqlalchemy = "*"
 pyjwt = "*"
+requests = "*"
+bs4 = "*"
+pylance = "*"
 
 [dev-packages]
 pytest = "*"
